@@ -1,0 +1,86 @@
+{% extends "base.html" %} {% load static %} {% block title %}Image Showcase
+{% endblock %} {% block header %} Image Card Showcase {% endblock %} {% block formAnc %}
+<div class="formAnc">
+  <a href="{% url 'form' %}">Add Car</a>
+</div>
+{% endblock %} {% block content %}
+<div class="container">
+  {% for image in images %}
+  <div class="image-card">
+    <img src="{{ image.image.url }}" alt="{{ image.title }}" />
+
+    <div class="card-content">
+      <h2>{{ image.title }}</h2>
+      <p>{{ image.description }}</p>
+
+      <div class="card-actions">
+        <button
+          class="btn view-btn"
+          data-title="{{ image.title }}"
+          data-desc="{{ image.description }}"
+          data-img="{{ image.image.url }}"
+        >
+          View
+        </button>
+
+        <a href="#" class="btn btn-update">
+          Update
+        </a>
+
+        <a
+          href="{% url 'delete_image' image.id %}"
+          class="btn btn-delete"
+          onclick="return confirm('Are you sure?');"
+        >
+          Delete
+        </a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<!-- ========== FULL PAGE OVERLAY ========== -->
+<div id="detailOverlay" class="overlay">
+  <span class="overlay-close">&times;</span>
+
+  <div class="overlay-content">
+    <img id="overlayImg" alt="">
+    <h2 id="overlayTitle"></h2>
+    <p id="overlayDesc"></p>
+  </div>
+</div>
+
+
+<script>
+const overlay = document.getElementById("detailOverlay");
+const overlayImg = document.getElementById("overlayImg");
+const overlayTitle = document.getElementById("overlayTitle");
+const overlayDesc = document.getElementById("overlayDesc");
+const closeBtn = document.querySelector(".overlay-close");
+
+document.querySelectorAll(".view-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    overlayImg.src = btn.dataset.img;
+    overlayTitle.textContent = btn.dataset.title;
+    overlayDesc.textContent = btn.dataset.desc;
+
+    overlay.style.display = "block";
+    document.body.style.overflow = "hidden"; // lock background scroll
+  });
+});
+
+closeBtn.onclick = () => {
+  overlay.style.display = "none";
+  document.body.style.overflow = "";
+};
+
+overlay.onclick = e => {
+  if (e.target === overlay) {
+    overlay.style.display = "none";
+    document.body.style.overflow = "";
+  }
+};
+</script>
+
+{% endblock %}

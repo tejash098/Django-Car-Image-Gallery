@@ -1,0 +1,79 @@
+# ==========================
+# Python / Django
+# ==========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django stuff
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Media & static (generated, not source)
+media/
+staticfiles/
+
+# ==========================
+# Environment / Secrets
+# ==========================
+.env
+.env.*
+.envrc
+
+# NEVER commit credentials
+*.pem
+*.key
+secrets.json
+
+# ==========================
+# Virtual Environments
+# ==========================
+venv/
+env/
+.venv/
+ENV/
+
+# ==========================
+# IDE / Editor junk
+# ==========================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ==========================
+# OS garbage
+# ==========================
+.DS_Store
+Thumbs.db
+
+# ==========================
+# Test / Coverage
+# ==========================
+.coverage
+htmlcov/
+.tox/
+.pytest_cache/
+
+# ==========================
+# Build / Distribution
+# ==========================
+build/
+dist/
+*.egg-info/
+
+# ==========================
+# Node (if frontend exists)
+# ==========================
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# ==========================
+# Django Migrations
+# ==========================
+# Keep __init__.py, ignore actual migration files if you want
+**/migrations/*
+!**/migrations/__init__.py
