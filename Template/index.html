@@ -39,8 +39,6 @@
   </div>
   {% endfor %}
 </div>
-
-<!-- ========== FULL PAGE OVERLAY ========== -->
 <div id="detailOverlay" class="overlay">
   <span class="overlay-close">&times;</span>
 
@@ -66,7 +64,7 @@ document.querySelectorAll(".view-btn").forEach(btn => {
     overlayDesc.textContent = btn.dataset.desc;
 
     overlay.style.display = "block";
-    document.body.style.overflow = "hidden"; // lock background scroll
+    document.body.style.overflow = "hidden"; 
   });
 });
 
