@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, get_object_or_404, redirect
 from .models import Image
 
 # Create your views here.
@@ -20,7 +20,19 @@ def form(request):
         return render(request, 'form.html')
 
 def delete_image(request, image_id):
-    image = Image.objects.get(id=image_id)
+    image = get_object_or_404(Image, id=image_id)
     image.delete()
-    return render(request, 'index.html', {'images': Image.objects.all()})
+    return redirect('index')
+    # return render(request, 'index.html', {'images': Image.objects.all()})
+
+def update_image(request, image_id):
+    image = get_object_or_404(Image, id=image_id)
+    if request.method == 'POST':
+        image.title = request.POST.get('title')
+        image.description = request.POST.get('description')
+        image.image = request.FILES.get('image')
+        image.save()
+        return redirect('index')
+    elif request.method == 'GET':
+        return render(request, 'update.html', {'image': image})
 
