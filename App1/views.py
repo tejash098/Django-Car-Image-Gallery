@@ -1,7 +1,6 @@
 from django.shortcuts import render, HttpResponse, get_object_or_404, redirect
 from .models import Image
 
-# Create your views here.
 def index(request):
     images = Image.objects.all()
     return render(request, 'index.html', {'images': images})
