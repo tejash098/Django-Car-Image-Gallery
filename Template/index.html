@@ -15,8 +15,8 @@
     <img src="{{ image.image.url }}" alt="{{ image.title }}" />
 
     <div class="card-content">
-      <h2>{{ image.title }}</h2>
-      <p>{{ image.description }}</p>
+      <h2>{{ image.title | upper }}</h2>
+      <p>{{ image.description | title }}</p>
 
       <div class="card-actions">
         <button
