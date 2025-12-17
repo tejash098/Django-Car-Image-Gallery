@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="form-wrapper">
+        <h2 style="text-align: center; color: var(--text-primary); margin-bottom: 1.5rem;">Create Account</h2>
+        
+        <form method="post" class="modern-form">
+            {% csrf_token %}
+            
+            {% if form.non_field_errors %}
+                <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid var(--danger); padding: 10px; border-radius: 8px; margin-bottom: 20px; color: var(--danger); text-align: center;">
+                    {% for error in form.non_field_errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                
+                <input 
+                    type="{{ field.field.widget.input_type }}" 
+                    name="{{ field.name }}" 
+                    id="{{ field.id_for_label }}" 
+                    class="form-control"
+                    placeholder="Enter {{ field.label|lower }}"
+                    {% if field.field.required %}required{% endif %}
+                >
+                
+                {% if field.errors %}
+                <ul style="color: var(--danger); font-size: 0.85rem; list-style: none; margin-top: 5px; padding: 0;">
+                    {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                
+                {% if field.help_text %}
+                    <small style="color: var(--text-secondary); font-size: 0.75rem; display: block; margin-top: 5px;">
+                        {{ field.help_text|safe }}
+                    </small>
+                {% endif %}
+            </div>
+            {% endfor %}
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-submit" style="width: 100%;">Sign Up</button>
+            </div>
+            
+            <p style="text-align: center; margin-top: 20px; color: var(--text-secondary);">
+                Already have an account? <a href="{% url 'login' %}" style="color: var(--accent-primary);">Login here</a>
+            </p>
+        </form>
+    </div>
+</div>
+{% endblock %}

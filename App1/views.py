@@ -1,5 +1,7 @@
 from django.shortcuts import render, HttpResponse, get_object_or_404, redirect
 from .models import Image
+from django.contrib.auth.decorators import login_required
+
 
 def index(request):
     query = request.GET.get('query')
@@ -8,6 +10,7 @@ def index(request):
         images = [i for i in images if query.lower() in i.title.lower() or query.lower() in i.description.lower()]
     return render(request, 'index.html', {'images': images})
 
+@login_required(login_url='login')
 def form(request):
     if request.method == 'POST':
         title = request.POST.get('title')
@@ -21,12 +24,14 @@ def form(request):
     elif request.method == 'GET':
         return render(request, 'form.html')
 
+@login_required(login_url='login')
 def delete_image(request, image_id):
     image = get_object_or_404(Image, id=image_id)
     image.delete()
     return redirect('index')
     # return render(request, 'index.html', {'images': Image.objects.all()})
 
+@login_required(login_url='login')
 def update_image(request, image_id):
     image = get_object_or_404(Image, id=image_id)
     if request.method == 'POST':

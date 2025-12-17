@@ -1,27 +1,88 @@
-    {% load static %}
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{% block title %}Modern Image Card{% endblock %}</title>
-        <link rel="shortcut icon" href="{% static 'images/luxury-car.png' %}" type="image/x-icon">
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Modern Image Card{% endblock %}</title>
+    <link
+      rel="shortcut icon"
+      href="{% static 'images/luxury-car.png' %}"
+      type="image/x-icon"
+    />
 
-        <link rel="stylesheet" href="{% static 'style.css' %}">
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    </head>
-    <body>
-        <header>
-            <h1>{% block header %}Image Card Showcase{% endblock %}</h1>
-            {% block searchBar %}{% endblock %}
-        </header>
-        {% block formAnc %}{% endblock %}
-        <main class="container">
-            {% block content %}{% endblock %}
-        </main>
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <div
+        class="nav-container"
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 1rem 2rem;
+        "
+      >
+        <h1>
+          <a
+            href="{% url 'index' %}"
+            style="text-decoration: none; color: inherit"
+            >{% block header %}Image Card Showcase{% endblock %}</a
+          >
+        </h1>
+        <nav>
+          <ul
+            style="
+              display: flex;
+              gap: 20px;
+              list-style: none;
+              margin: 0;
+              padding: 0;
+            "
+          >
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'form' %}" class="nav-link">Add Car</a></li>
+            <li>
+              <form
+                action="{% url 'logout' %}"
+                method="post"
+                style="display: inline"
+              >
+                {% csrf_token %}
+                <button
+                  type="submit"
+                  class="nav-link"
+                  style="
+                    background: none;
+                    border: none;
+                    cursor: pointer;
+                    color: inherit;
+                    font: inherit;
+                  "
+                >
+                  Logout
+                </button>
+              </form>
+            </li>
+            {% else %}
+            <li><a href="{% url 'login' %}" class="nav-link">Login</a></li>
+            <li><a href="{% url 'register' %}" class="nav-link">Sign Up</a></li>
+            {% endif %}
+          </ul>
+        </nav>
+      </div>
+      {% block searchBar %}{% endblock %}
+    </header>
+    {% block formAnc %}{% endblock %}
+    <main class="container">{% block content %}{% endblock %}</main>
 
-        <footer>
-            <p>&copy; 2025 Modern Image Card</p>
-        </footer>
-    </body>
-    </html>
+    <footer>
+      <p>&copy; 2025 Modern Image Card</p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="form-wrapper">
+        <h2 style="text-align: center; color: var(--text-primary); margin-bottom: 1.5rem;">Welcome Back</h2>
+        
+        <form method="post" class="modern-form">
+            {% csrf_token %}
+            
+            {% if form.errors %}
+                <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid var(--danger); padding: 10px; border-radius: 8px; margin-bottom: 20px; color: var(--danger); text-align: center;">
+                    Your username and password didn't match. Please try again.
+                </div>
+            {% endif %}
+
+            <div class="form-group">
+                <label for="id_username">Username</label>
+                <input type="text" name="username" autofocus required id="id_username" placeholder="Enter username">
+            </div>
+
+            <div class="form-group">
+                <label for="id_password">Password</label>
+                <input type="password" name="password" required id="id_password" placeholder="Enter password">
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-submit" style="width: 100%;">Sign In</button>
+            </div>
+            
+            <p style="text-align: center; margin-top: 20px; color: var(--text-secondary);">
+                Don't have an account? <a href="#" style="color: var(--accent-primary);">Sign up</a>
+            </p>
+        </form>
+    </div>
+</div>
+{% endblock %}
