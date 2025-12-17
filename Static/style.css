@@ -80,6 +80,37 @@ header h1 {
   letter-spacing: -0.5px;
 }
 
+header .searchBar {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+header .searchBar input {
+  padding: 8px 15px;
+  border-radius: 20px;
+  border: 1px solid #333;
+  background: #121212;
+  color: white;
+  outline: none;
+  width: 250px;
+}
+
+header .searchBar input:focus {
+  border-color: #bb86fc;
+}
+
+header .searchBar button {
+  padding: 8px 20px;
+  border-radius: 20px;
+  border: none;
+  background: #bb86fc;
+  color: #121212;
+  font-weight: bold;
+  cursor: pointer;
+}
+
 .formAnc {
   display: flex;
   justify-content: center;
@@ -512,4 +543,3 @@ footer {
     width: 100%;
   }
 }
-

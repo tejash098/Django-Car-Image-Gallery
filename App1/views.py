@@ -2,7 +2,10 @@ from django.shortcuts import render, HttpResponse, get_object_or_404, redirect
 from .models import Image
 
 def index(request):
+    query = request.GET.get('query')
     images = Image.objects.all()
+    if query:
+        images = [i for i in images if query.lower() in i.title.lower() or query.lower() in i.description.lower()]
     return render(request, 'index.html', {'images': images})
 
 def form(request):

@@ -1,5 +1,10 @@
 {% extends "base.html" %} {% load static %} {% block title %}Image Showcase
-{% endblock %} {% block header %} Image Card Showcase {% endblock %} {% block formAnc %}
+{% endblock %} {% block header %} Image Card Showcase {% endblock %} {% block searchBar %}
+<form action="{% url 'index' %}" method="GET" class="searchBar">
+  <input type="text" name="query" placeholder="Search..." value="{{ query|default:'' }}">
+  <button type="submit">Search</button>
+</form>
+{% endblock %} {% block formAnc %}
 <div class="formAnc">
   <a href="{% url 'form' %}">Add Car</a>
 </div>
