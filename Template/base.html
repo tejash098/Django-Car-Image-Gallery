@@ -46,32 +46,16 @@
             "
           >
             {% if user.is_authenticated %}
-            <li><a href="{% url 'form' %}" class="nav-link">Add Car</a></li>
             <li>
-              <form
-                action="{% url 'logout' %}"
-                method="post"
-                style="display: inline"
-              >
-                {% csrf_token %}
-                <button
-                  type="submit"
-                  class="nav-link"
-                  style="
-                    background: none;
-                    border: none;
-                    cursor: pointer;
-                    color: inherit;
-                    font: inherit;
-                  "
-                >
-                  Logout
-                </button>
-              </form>
+              <a href="{% url 'logout' %}" class="btn btn-delete">Logout</a>
             </li>
             {% else %}
-            <li><a href="{% url 'login' %}" class="nav-link">Login</a></li>
-            <li><a href="{% url 'register' %}" class="nav-link">Sign Up</a></li>
+            <li>
+              <a href="{% url 'login' %}" class="btn btn-secondary">Login</a>
+            </li>
+            <li>
+              <a href="{% url 'register' %}" class="btn btn-primary">Sign Up</a>
+            </li>
             {% endif %}
           </ul>
         </nav>

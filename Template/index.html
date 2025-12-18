@@ -27,18 +27,19 @@
         >
           View
         </button>
+        {% if user.is_authenticated %}
+          <a href="{% url 'update_image' image.id %}" class="btn btn-update">
+            Update
+          </a>
 
-        <a href="{% url 'update_image' image.id %}" class="btn btn-update">
-          Update
-        </a>
-
-        <a
-          href="{% url 'delete_image' image.id %}"
-          class="btn btn-delete"
-          onclick="return confirm('Are you sure?');"
-        >
-          Delete
-        </a>
+          <a
+            href="{% url 'delete_image' image.id %}"
+            class="btn btn-delete"
+            onclick="return confirm('Are you sure?');"
+          >
+            Delete
+          </a>
+        {% endif %}
       </div>
     </div>
   </div>
