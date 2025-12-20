@@ -3,6 +3,7 @@
 <form action="{% url 'index' %}" method="GET" class="searchBar">
   <input type="text" name="query" placeholder="Search..." value="{{ query|default:'' }}">
   <button type="submit">Search</button>
+  <span style="color: var(--text-secondary); font-size: 24px; margin-left: 10px;">Cards available: {{ images.count }}</span>
 </form>
 {% endblock %} {% block formAnc %}
 <div class="formAnc">
